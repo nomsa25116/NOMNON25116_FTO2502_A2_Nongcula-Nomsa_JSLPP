@@ -84,6 +84,140 @@ h4 {
   overflow: hidden; /* Prevents overflowed text/icons from showing */
 }
 
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: auto;
+}
+/* Light Mode */
+body.light {
+  background-color: #f4f7fe;
+  color: #000;
+}
+
+body.light .board {
+  background: #e6ebff;
+}
+
+body.light .task {
+  background: white;
+  color: black;
+}
+
+/* Dark Mode */
+body.dark {
+  background-color: #1e1e2f;
+  color: white;
+}
+
+body.dark .board {
+  background: #000112;
+}
+
+body.dark .task {
+  background: #3E3F4F;
+  color: white;
+}
+
+body.dark .side-bar {
+  background: #3E3F4F;
+  color: white;
+}
+
+body.dark .sticky-header {
+  background: #3E3F4F;
+  color: white;
+}
+
+body.dark .toggle-container {
+  background-color: #6c5ce7;
+}
+
+body.dark .hide-btn {
+  background-color: #6c5ce7; /* Adjust button color for dark mode */
+  color: #fff;
+
+}
+
+/* Toggle Switch Styles */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px; /* Center the toggle switch */
+  gap: 10px;
+  background-color: #f4f7fd;
+  border-radius: 12px;
+  padding: 10px 10px;
+  
+  
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #6c5ce7;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #3E3F4F;
+}
+
+input:checked + .slider::before {
+  transform: translateX(24px);
+}
+
+.hide-btn {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  background-color: #f4f7fd;
+  color: #6c5ce7;
+  border: none;
+  border-radius: 0 100px 100px 0; /* Pill shape only on right side */
+  height: 48px;
+  width: 276px;
+  margin-bottom: 40px;
+  padding: 28px 12px 28px 50px;
+  font-size: 0.9375rem;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden; /* Prevents overflowed text/icons from showing */
+}
+
 /* ===============
    Main Layout
 ================ */
