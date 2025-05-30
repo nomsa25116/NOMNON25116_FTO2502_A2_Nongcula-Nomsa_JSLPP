@@ -123,5 +123,35 @@
         <button id="createTaskBtn" class="create-task-btn">Create Task</button>
       </form>
     </dialog>
+    <!--New Task Modal-->
+
+    <dialog class="edit-modal-overlay">
+      <form class="edit-modal-window" id="edit-task-modal-window">
+        <div class="modal-header" id="editTaskModal">
+          <h3>Task</h3>
+          <button type="button" class="close-btn" id="close-edit-modal-btn">
+            &times;
+          </button>
+        </div>
+
+        <label for="editTitle">Title</label>
+        <input id="editTitle" name="title" required />
+
+        <label for="editDescription">Description</label>
+        <textarea id="editDescription" name="description" rows="4"></textarea>
+
+        <label for="editStatus">Status</label>
+        <select id="editStatus">
+          <option value="todo">todo</option>
+          <option value="doing">doing</option>
+          <option value="done">done</option>
+        </select>
+
+        <div class="modal-buttons">
+          <button type="submit" id="saveChangesBtn">Save Changes</button>
+          <button type="button" id="deleteTaskBtn">Delete Task</button>
+        </div>
+      </form>
+    </dialog>
   </body>
 </html>

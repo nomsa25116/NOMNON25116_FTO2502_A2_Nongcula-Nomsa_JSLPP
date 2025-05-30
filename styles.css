@@ -140,6 +140,38 @@ body.dark .hide-btn {
 
 }
 
+.body.dark
+
+body.dark .edit-modal-window {
+  background: #1e1e2f;
+  color: #f3f3f3;
+}
+
+body.dark.edit-modal-window input,
+body.dark .edit-modal-window textarea,
+body.dark .edit-modal-window select {
+  background-color: #2a2a3d;
+  color: #f3f3f3;
+  border: 1px solid #444;
+}
+
+body.dark .close-btn {
+  color: #ccc;
+}
+
+body.dark .close-btn:hover {
+  color: #fff;
+}
+
+/* Smooth transitions for theme toggle */
+.edit-modal-window,
+.edit-modal-window input,
+.edit-modal-window textarea,
+.edit-modal-window select,
+.close-btn {
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
 /* Toggle Switch Styles */
 .toggle-container {
   display: flex;
@@ -477,6 +509,85 @@ form select {
   background-color: #7264e0;
 }
 
+.edit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.edit-modal-window {
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+
+/* Form inputs */
+.edit-modal-window input,
+.edit-modal-window textarea,
+.edit-modal-window select {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Buttons container */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Save Changes - Purple */
+#saveChangesBtn {
+  background-color: #7c3aed; /* Purple */
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#saveChangesBtn:hover {
+  background-color: #6d28d9;
+}
+
+/* Delete Task - Orange */
+#deleteTaskBtn {
+  background-color: #f97316; /* Orange */
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#deleteTaskBtn:hover {
+  background-color: #ea580c;
+}
 
 /* ========================
    Responsive Styles
