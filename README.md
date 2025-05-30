@@ -1,4 +1,4 @@
-  NETLIFY LINK:  nomsa25116-85d15b.netlify.app
+https://app.netlify.com/projects/nomsa25116-85d15b/deploys/6839a93f95a67479b7f6b23c
 # JSL Portfolio Piece: Kanban App Deployment & Features Implementation
 
 ## Overview
