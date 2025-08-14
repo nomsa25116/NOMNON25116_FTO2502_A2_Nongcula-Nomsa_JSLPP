@@ -1,4 +1,7 @@
-https://app.netlify.com/projects/nomsa25116-85d15b/deploys/6839a93f95a67479b7f6b23c
+https://nomsa25116-85d15b.netlify.app/
+
+https://veed.io/view/49faf1a9-66c2-4d07-a5b4-ba963068ba69
+
 # JSL Portfolio Piece: Kanban App Deployment & Features Implementation
 
 ## Overview
