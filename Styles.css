@@ -1,0 +1,626 @@
+/* ========================
+   Global & Root Variables
+======================== */
+* {
+  box-sizing: border-box; /* Ensures padding and border are included in total element size */
+}
+
+:root {
+  --primary-bg: #f4f7fa; /* Light background */
+  --secondary-bg: #ffffff; /* Card/sidebar background */
+  --text-color: #000112; /* Dark text */
+  --button-text-color: #ffffff;
+  --button-color: #635fc7;
+  --primary-font-color: #000000; /* This will be overridden by --text-color for most text */
+  --secondary-font-color: #828fa3;
+  --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015); /* Subtle shadow for card depth */
+  --sidebar-width: 300px; /* Sidebar fixed width */
+}
+
+/* Dark mode specific variables */
+body.dark-mode {
+  --primary-bg: #20212c; /* Darker background */
+  --secondary-bg: #2b2c37; /* Darker card/sidebar background */
+  --text-color: #ffffff; /* Light text */
+  --primary-font-color: #ffffff; /* Ensure this is also updated for dark mode */
+}
+
+/* Apply variables to your elements */
+body {
+  background-color: var(--primary-bg);
+  color: var(--text-color); /* Applies to default text */
+  font-family: "Plus Jakarta Sans", sans-serif;
+  display: flex; /* Allow layout to span horizontally */
+  flex-direction: row;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  font-size: 1rem; /* Base font size for rem scaling */
+  /* Add transition for overall body changes for smoother theme toggle */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ================
+   Sidebar Layout
+================ */
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--secondary-bg);
+  border-right: 1px solid #e4ebfa; /* Light divider */
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width); /* Ensure it doesn't shrink below this */
+  height: 100vh;
+  transition: width 0.3s ease, min-width 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  overflow: hidden; /* Hide content when sidebar is narrow */
+}
+
+body.dark-mode .side-bar {
+  border-right-color: #3e3f4e; /* Darker border for dark mode sidebar */
+}
+
+#side-logo-div {
+  margin: 33px 113px 54px 34px; /* Spacing around logo */
+  display: flex;
+  justify-content: flex-start;
+}
+
+#logo {
+  width: 100%; /* Make logo responsive within container */
+}
+
+.boards-nav-links-div {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color); /* This will be white in dark mode */
+}
+
+#headline-sidepanel {
+  padding: 0 12px 0 50px; /* Aligns section content from left and right */
+  color: var(--secondary-font-color); /* This color usually stays the same */
+}
+
+h4 {
+  color: var(--secondary-font-color);
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem; /* Makes heading more spaced */
+}
+
+.board-btn,
+.theme-btn {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 0 100px 100px 0; /* Pill shape only on right side */
+  height: 48px;
+  width: 276px;
+  padding: 28px 12px 28px 50px;
+  font-size: 0.9375rem;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden; /* Prevents overflowed text/icons from showing */
+  margin-bottom: 10px; /* Spacing between buttons */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Specific styling for the theme button */
+.theme-btn {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  background-color:#635FC7;
+  cursor: pointer;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+.theme-btn::after {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: white;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.theme-btn.active {
+  background-color: #4CAF50;
+}
+
+.theme-btn.active::after {
+  transform: translateX(30px);
+}
+
+/* Optional: Add some text indicators */
+.theme-btn::before {
+  content: '☀️';
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.theme-btn.active::before {
+  content: '🌙';
+  left: auto;
+  right: 5px;
+}
+
+/* New: Sidebar Toggle Buttons */
+.sidebar-toggle-container {
+  padding: 0 10px 32px 10px; /* Padding for the hide button at the bottom */
+  margin-top: auto; /* Pushes it to the bottom of the flex container */
+}
+
+.hide-sidebar-btn {
+  width: 100%; /* Make it fill its container */
+  background: none; /* No background */
+  color: var(--secondary-font-color); /* Lighter text color */
+  font-weight: 600;
+  text-align: left;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.3s ease;
+}
+
+.hide-sidebar-btn:hover {
+  color: var(--text-color); /* Darker on hover */
+}
+
+.show-sidebar-btn {
+  position: fixed;
+  bottom: 32px;
+  left: -60px; /* Initially off-screen */
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 0 50px 50px 0; /* Rounded on right */
+  padding: 1px 10px;
+  cursor: pointer;
+  z-index: 1000; /* Ensure it's above other content */
+  opacity: 0; /* Initially invisible */
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  font-size: 1rem; /* Larger for the icon */
+}
+
+.show-sidebar-btn.visible {
+  left: 0px; /* Slide into view */
+  opacity: 1; /* Fade in */
+}
+
+/* State when sidebar is hidden */
+body.sidebar-hidden .side-bar {
+  width: 0;
+  min-width: 0;
+  border-right: none; /* Hide border */
+  /* Optional: if you want it to slide completely out */
+  /* transform: translateX(-100%); */
+}
+
+/* Adjust main layout when sidebar is hidden */
+#layout {
+  /* No margin-left if sidebar is hidden, as body is flex container */
+  flex: 1; /* Allow layout to take full available space */
+}
+
+
+/* ===============
+   Main Layout
+================ */
+#layout {
+  flex: 1; /* Fills remaining space beside sidebar */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  width: 100%;
+}
+
+/* ===============
+   Header Section
+================ */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--secondary-bg); /* Header background also changes */
+  color: var(--text-color); /* Header text also changes */
+  height: 96px;
+  padding: 0 35px 0 30px;
+  border-bottom: 1px solid #e4ebfa;
+  width: 100%;
+  font-size: 1.875rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode header {
+  border-bottom-color: #3e3f4e; /* Darker border for dark mode header */
+}
+
+.header-name-div {
+  display: flex;
+  align-items: center;
+}
+
+.logo-mobile {
+  display: none; /* Hidden on desktop; shown on smaller screens */
+}
+
+/* ===============
+   Board Columns
+================ */
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 35px;
+  box-sizing: border-box;
+}
+
+.card-column-main {
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    minmax(0, 304px)
+  ); /* 3 columns with min size */
+  gap: 8px; /* Space between columns */
+}
+
+.column-div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 12px;
+}
+
+.column-head-div {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between dot and column title */
+}
+
+.columnHeader {
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem;
+  color: var(--secondary-font-color); /* This color usually stays the same */
+  margin: 0;
+}
+
+/* Status Dots */
+.dot {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%; /* Make it circular */
+  display: inline-block;
+}
+
+#todo-dot {
+  background-color: #49c4e5;
+}
+
+#doing-dot {
+  background-color: #8471f2;
+}
+
+#done-dot {
+  background-color: #219c90;
+}
+
+/* ===============
+   Task Cards
+================ */
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-div {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  width: 100%;
+  height: 60px;
+  background-color: var(--secondary-bg); /* Task card background also changes */
+  color: var(--text-color); /* Task card text also changes */
+  border-radius: 12px;
+  box-shadow: var(--primary-box-shadow);
+  cursor: pointer; /* Indicate it's clickable */
+  margin-bottom: 20px;
+  font-size: 0.9375rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .task-div {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Darker shadow for dark mode cards */
+}
+
+/* ===============
+   Headings
+================ */
+h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* ===============
+   Modal Styles
+================ */
+/* Remove default dialog styles */
+dialog {
+  position: fixed;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+}
+
+/* Style the modal box */
+#task-modal::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#task-modal, #add-task-modal {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  padding: 24px;
+  background-color: var(--secondary-bg); /* Modal background changes with theme */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: var(--text-color); /* Modal text changes with theme */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #ea5555;
+  transition: transform 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+  transition-delay: 0.1s; /* Delay before scaling */
+}
+
+.close-btn:hover {
+  transform: scale(1.15);
+  font-weight: 600;
+}
+
+.close-btn:focus {
+  outline: none;
+}
+
+/* Form elements */
+form label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.75em;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  color: var(--secondary-font-color); /* Label color usually static */
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #828fa3;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.8125em;
+  resize: vertical;
+  background-color: transparent; /* Allows modal background to show through */
+  color: var(--text-color); /* Input text color changes with theme */
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+form select {
+  appearance: none; /* Remove native arrow */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="%23828FA3" stroke-width="3" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>')
+    no-repeat right 0.75rem center;
+  background-size: 1.4rem;
+  padding-right: 1rem;
+}
+
+/* Styles for the "Add New Task" button inside the modal */
+#create-task {
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 24px;
+  padding: 10px 18px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.9375rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 20px;
+  width: 100%; /* Make it full width in the modal */
+}
+
+
+/* ========================
+   Responsive Styles
+======================== */
+
+/******** Tablets ********/
+@media screen and (max-width: 1023px) {
+  .side-bar {
+    display: none; /* Hide sidebar on tablets and smaller by default */
+  }
+
+  .side-bar.show-sidebar {
+    display: flex !important;
+    position: fixed; /* Overlay on top of page */
+    height: auto;
+  }
+
+  #side-logo-div {
+    display: none;
+  }
+
+  .logo-mobile {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+
+  body {
+    font-size: 0.8rem;
+  }
+
+  .board-btn {
+    font-size: 0.8rem;
+    padding-left: 15px;
+    margin-right: 15px;
+    font-weight: 700;
+  }
+
+  .container {
+    padding: 0;
+    width: 100%;
+    align-items: center; /* Center columns on smaller screens */
+  }
+
+  .card-column-main {
+    grid-template-columns: repeat(2, minmax(0, 360px));
+    gap: 8px;
+  }
+
+  header {
+    height: 64px;
+    padding: 0 10px 0 18px;
+    border: none;
+  }
+
+  #header-board-name {
+    font-size: 1rem;
+  }
+
+  .task-div {
+    width: 100%;
+  }
+
+  .columnHeader {
+    font-size: 0.75rem;
+  }
+
+  .dot {
+    height: 8px;
+    width: 8px;
+  }
+
+  .column-head-div {
+    gap: 8px;
+  }
+
+  .column-div {
+    width: 100%;
+  }
+
+  /* Adjust show/hide buttons for tablets */
+  .show-sidebar-btn {
+    bottom: 20px;
+    padding: 8px 15px;
+  }
+}
+
+/******** Mobile ********/
+@media screen and (max-width: 576px) {
+  .card-column-main {
+    grid-template-columns: minmax(
+      0,
+      380px
+    ); /* Stack columns in single column */
+  }
+
+  .column-div {
+    padding: 24px;
+  }
+
+  .add-task-btn {
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Makes it a perfect circle */
+  }
+
+  .full-text {
+    display: none;
+  }
+  
+  .mobile-icon {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .show-sidebar-btn {
+    bottom: 10px;
+    padding: 6px 12px;
+    font-size: 1.2rem;
+  }
+}
+
+.header-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.add-task-btn {
+  background-color: #635fc7;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 18px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.9375rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px; /* Ensure button has minimum size on mobile */
+}
+
