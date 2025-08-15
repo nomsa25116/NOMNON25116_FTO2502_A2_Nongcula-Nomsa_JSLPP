@@ -1,5 +1,5 @@
 # Live Demo
-View my Deployed App on Netlify()
+View my Deployed App on Netlify (https://nomsa25116.netlify.app/)
 
 View my recorded presentation on Veed.io ()
 
