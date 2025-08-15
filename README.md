@@ -5,9 +5,21 @@ View my recorded presentation on Veed.io ()
 
 ---
 
-# Kanban Task Management App & Features Implementation
+## Kanban Task Management App & Features Implementation overview
 
 - Responsive Sidebar: Desktop Toggle interacts
 - Dynamic Task Fetching: Loads tasks from [JSL Kanban API] 'https://jsl-kanban-api.vercel.app'
 - Task editing and Deletation: Update or Remove tasks via modal.
 - Dark/Light: Smoothly switch the modes.
+
+---
+
+## Tech Stack
+
+- **HTML5**
+- **CSS3**
+- **JavaScript** 
+- **LocalStorage**
+- **Git & GitHub**
+- **Netlify** (deployment)
+- 
